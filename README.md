@@ -177,3 +177,4 @@ Changes take effect immediately on the next student query.
 - **Frontend:** Vanilla JS SPA (no framework), DM Sans font
 - **Database:** SQLite (zero-config, file-based)
 - **Auth:** JWT stored in httpOnly cookies
+# acadbot
