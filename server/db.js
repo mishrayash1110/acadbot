@@ -9,7 +9,10 @@ let client;
 async function getClient() {
   if (client) return client;
   const { createClient } = require('@libsql/client');
-  client = createClient({ url: 'file:' + DB_PATH });
+  client = createClient({
+  url: process.env.TURSO_URL || 'file:' + DB_PATH,
+  authToken: process.env.TURSO_TOKEN || '',
+});
   return client;
 }
 
