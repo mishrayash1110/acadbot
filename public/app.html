@@ -4,78 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>AcadBot — Academic Support</title>
-
-  <!-- PWA -->
   <link rel="manifest" href="/manifest.json"/>
-  <meta name="theme-color" content="#1a5fb4"/>
+  <meta name="theme-color" content="#0a0f1e"/>
   <meta name="mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
   <meta name="apple-mobile-web-app-title" content="AcadBot"/>
-
-  <!-- Apple icons -->
-  <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png"/>
   <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png"/>
-  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png"/>
-
-  <!-- Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/app.css"/>
-
   <style>
-    /* Mobile safe areas */
-    .chat-input-area { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
-    .sidebar { padding-bottom: env(safe-area-inset-bottom); }
-    /* Install banner */
-    #install-banner {
-      display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-      background: #1a5fb4; color: white; padding: 12px 20px; border-radius: 24px;
-      font-size: 13px; font-family: 'DM Sans', sans-serif; z-index: 999;
-      box-shadow: 0 4px 20px rgba(26,95,180,0.4); cursor: pointer;
-      display: none; align-items: center; gap: 8px; white-space: nowrap;
-    }
-    #install-banner.show { display: flex; }
+    #install-banner{display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2563eb,#06b6d4);color:white;padding:13px 22px;border-radius:100px;font-size:13px;font-family:'Plus Jakarta Sans',sans-serif;z-index:999;box-shadow:0 4px 24px rgba(37,99,235,0.5);cursor:pointer;align-items:center;gap:8px;white-space:nowrap;font-weight:600}
+    #install-banner.show{display:flex}
   </style>
 </head>
 <body>
   <div id="app"></div>
-
-  <div id="install-banner" onclick="installPWA()">
-    📲 Install AcadBot as App
-  </div>
-
+  <div id="install-banner" onclick="installPWA()">📲 Install AcadBot as App</div>
   <script src="/js/app.js"></script>
   <script>
-    // Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(r => console.log('SW registered'))
-          .catch(e => console.log('SW error:', e));
-      });
-    }
-
-    // Install prompt
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));}
     let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('install-banner').classList.add('show');
-    });
-
-    function installPWA() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        deferredPrompt = null;
-        document.getElementById('install-banner').classList.remove('show');
-      });
-    }
-
-    window.addEventListener('appinstalled', () => {
-      document.getElementById('install-banner').classList.remove('show');
-    });
+    window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;document.getElementById('install-banner').classList.add('show');});
+    function installPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('install-banner').classList.remove('show');});}
   </script>
 </body>
 </html>
