@@ -50,7 +50,7 @@ function renderLogin() {
           onkeydown="if(event.key==='Enter')doLogin()"/></div>
       <button class="btn btn-primary" id="login-btn" onclick="doLogin()">Sign in</button>
       <div class="auth-switch">Don't have an account? <a href="#" onclick="goPage('register')">Register</a></div>
-      <div class="demo-hint"><b>Demo admin:</b> admin@acadbot.edu / admin123</div>
+     
     </div>
   </div>`;
 }
